@@ -1,29 +1,27 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
-@Component({
-  selector: 'event-thumbnail',
-  template: `
+@Component({selector: 'event-thumbnail', template: `
   <div class="well hoverwell thumbnail">
         <h2>{{event.name}}</h2>
         <div>date: {{event.date}}</div>
         <div>time: {{event.time}}</div>
         <div>price: \${{event.price}}</div>
-        <div>
-
+        <!-- <div *ngIf="event?.location"> -->
+        <div [hidden]="!event?.location">
             <span>Location: {{event.location.address}}</span>
             <span class="pad-left">{{event.location.city}}, {{event.location.country}}</span>
-            
         </div>
-        
+        <div *ngIf="event?.onlineUrl">
+          Online Url: {{event?.onlineUrl}}
+        </div>
     </div>
-  `,
-  styles: [`.pad-left {margin-left: 10px;}
-            .well div {color: #bbb;}`]
-})
+  `, styles: [`
+            .thumbnail {min-height: 210px;}
+            .pad-left {margin-left: 10px;}
+            .well div {color: #bbb;}`]})
 
 export class EventThumbnailComponent {
 
-  @Input() event: any;
-  
- 
+  @Input()event : any;
+
 }
